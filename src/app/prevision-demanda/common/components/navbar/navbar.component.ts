@@ -43,15 +43,36 @@ export class NavbarComponent implements AfterContentChecked {
 
 	// Método para cerrar la sesión del usuario
 	closeSesion() {
-		localStorage.clear(); // Limpiar el almacenamiento local
-		this.router.navigate(['register']); // Redirigir a la página de registro
-	}
+		const user = localStorage.getItem('user');
+		if (user) {
+			const userData = JSON.parse(user);
+			fetch('https://jpastorcasquero.pythonanywhere.com/users/logout', {
+				method: 'POST',
+				headers: {
+				'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ user_id: userData.id })
+			})
+			.then(response => {
+				if (!response.ok) {
+				console.warn("⚠️ Error al registrar logout en el backend.");
+				}
+			})
+			.catch(error => {
+				console.error("❌ Error en logout:", error);
+			});
+		}
 
-	// Método para alternar la visibilidad del menú
-	toggleMenu() {
-		console.log("toggleMenu");
-		this.showMenu = !this.showMenu; // Alternar el estado de la propiedad showMenu
-		console.log("toggleMenu:", this.showMenu);
+		localStorage.clear(); // Limpiar el almacenamiento local
+		alert("Sesión cerrada correctamente."); // ✅ Mensaje de confirmación
+		this.router.navigate(['register']); // Redirigir a la página de registro
+		}
+
+		// Método para alternar la visibilidad del menú
+		toggleMenu() {
+			console.log("toggleMenu");
+			this.showMenu = !this.showMenu; // Alternar el estado de la propiedad showMenu
+			console.log("toggleMenu:", this.showMenu);
 	}
 
 	// Método para cerrar el menú
