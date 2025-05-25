@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
       .subscribe((data: any): any => {  // Se suscribe al observable para manejar la respuesta
         if (data) {  // Si hay datos en la respuesta
           console.log(data)
-          localStorage.setItem('user', JSON.stringify(data));  // Guarda los datos del usuario en el almacenamiento local
+          localStorage.setItem('user', JSON.stringify(data.user));    // Guarda los datos del usuario en el almacenamiento local
           console.log("imprimierndo datos de usuario"+localStorage.getItem('user'))
           this.router.navigate(['info']);  // Navega a la página de conversaciones
         } else {

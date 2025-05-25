@@ -9,7 +9,7 @@ export const environment = {
 	// URL de la API para los teléfonos
 	phone: 'https://jpastorcasquero.pythonanywhere.com/phones',
 	// URL de la API para las conexiones
-	connection: 'https://jpastorcasquero.pythonanywhere.com/connections/',
+	connection: 'https://jpastorcasquero.pythonanywhere.com/connections',
 	// URL de la API para obtener clasificador
 	getClassifier: 'https://jpastorcasquero.pythonanywhere.com/get_classifier',
 	// URL de la API para obtener clasificador
