@@ -87,31 +87,40 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  save(): void {
-    if (!this.form?.valid) return;
+	save(): void {
+		if (!this.form?.valid) return;
 
-    const userData = localStorage.getItem('user');
-    if (!userData) return;
+		const userData = localStorage.getItem('user');
+		if (!userData) return;
 
-    const storedUser = JSON.parse(userData);
-    const formValue = this.form.value;
+		const storedUser = JSON.parse(userData);
+		const formValue = this.form.value;
 
-    const updatedUser = {
-		id: storedUser.id,
-		name: formValue.name || storedUser.name,
-		nick_name: formValue.nickName || storedUser.nick_name, 
-		email: formValue.email || storedUser.email,
-		password: formValue.password || storedUser.password,
+		const updatedUser = {
+			id: storedUser.id,
+			name: formValue.name || storedUser.name,
+			nick_name: formValue.nickName || storedUser.nick_name,
+			email: formValue.email || storedUser.email,
+			password: formValue.password || storedUser.password,
+			role: storedUser.role,
+			image: storedUser.image,
 		};
 
+		this.userService.putEditUser(updatedUser).subscribe({
+			next: (data: any) => {
+				if (data) {
+				localStorage.setItem('user', JSON.stringify(data));
+				this.router.navigate(['profile']);
+				}
+			},
+			error: (error) => {
+				console.error('❌ Error al actualizar el usuario:', error);
+				const errorMsg = error?.error?.error || 'Error interno del servidor.';
+				alert(`⚠️ ${errorMsg}`);
+			}
+		});
+		}
 
-    this.userService.putEditUser(updatedUser).subscribe((data: any) => {
-      if (data) {
-        localStorage.setItem('user', JSON.stringify(data));
-        this.router.navigate(['profile']);
-      }
-    });
-  }
 
   deleteUser(): void {
     const userData = localStorage.getItem('user');
