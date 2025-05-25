@@ -13,7 +13,7 @@ export class UserService {
 	private readonly GET_USER = `${environment.user}`;
 	private readonly GET_EXIST_MAIL = environment.user+'check_email';
 	private readonly GET_LOGIN = `${environment.user}login`;
-	private readonly POST_REGISTER = `${environment.user}`;
+	private readonly POST_REGISTER = 'https://jpastorcasquero.pythonanywhere.com/api/users/';//`${environment.user}`;
 	private readonly PUT_EDIT_USER = `${environment.user}`;
 	private readonly DELETE_USER = `${environment.user}`;
 	private readonly POST_ACCOUNT_VALIDATION = `${environment.user}account-validation`;
@@ -86,6 +86,13 @@ export class UserService {
 			.post<any>(this.GET_RESTORE_PASSWORD, { email, password })
 			.pipe(catchError(this.handleError));
 	}
+
+	postRecoverPassword(email: string): Observable<any> {
+	return this.httpClient
+		.post<any>('https://jpastorcasquero.pythonanywhere.com/users/reset_password', { email })
+		.pipe(catchError(this.handleError));
+	}
+
 
 	// Función para manejar los errores de HTTP
 	handleError(error: HttpErrorResponse): Observable<never> {

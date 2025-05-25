@@ -81,46 +81,50 @@ export class ProfileComponent implements OnInit {
       const user = JSON.parse(userData);
       this.form.patchValue({
         name: user.name || '',
-        nickName: user.nick_name || '', // <-- Corregido aquí
+        nickName: user.nick_name || '',
         email: user.email || '',
       });
     }
   }
 
-	save(): void {
-		if (!this.form?.valid) return;
+  save(): void {
+    if (!this.form?.valid) return;
 
-		const userData = localStorage.getItem('user');
-		if (!userData) return;
+    const userData = localStorage.getItem('user');
+    if (!userData) return;
 
-		const storedUser = JSON.parse(userData);
-		const formValue = this.form.value;
+    const storedUser = JSON.parse(userData);
+    const formValue = this.form.value;
 
-		const updatedUser = {
-			id: storedUser.id,
-			name: formValue.name || storedUser.name,
-			nick_name: formValue.nickName || storedUser.nick_name,
-			email: formValue.email || storedUser.email,
-			password: formValue.password || storedUser.password,
-			role: storedUser.role,
-			image: storedUser.image,
-		};
+    const updatedUser = {
+      id: storedUser.id,
+      name: formValue.name || storedUser.name,
+      nick_name: formValue.nickName || storedUser.nick_name,
+      email: formValue.email || storedUser.email,
+      password: formValue.password || storedUser.password,
+      role: storedUser.role,
+      image: storedUser.image,
+    };
 
-		this.userService.putEditUser(updatedUser).subscribe({
-			next: (data: any) => {
-				if (data) {
-				localStorage.setItem('user', JSON.stringify(data));
-				this.router.navigate(['profile']);
-				}
-			},
-			error: (error) => {
-				console.error('❌ Error al actualizar el usuario:', error);
-				const errorMsg = error?.error?.error || 'Error interno del servidor.';
-				alert(`⚠️ ${errorMsg}`);
-			}
-		});
-		}
-
+    this.userService.putEditUser(updatedUser).subscribe({
+      next: (data: any) => {
+        if (data) {
+          // Fusionar con los datos anteriores
+          const mergedUser = {
+            ...storedUser,
+            ...data
+          };
+          localStorage.setItem('user', JSON.stringify(mergedUser));
+          this.router.navigate(['profile']);
+        }
+      },
+      error: (error) => {
+        console.error('❌ Error al actualizar el usuario:', error);
+        const errorMsg = error?.error?.error || 'Error interno del servidor.';
+        alert(`⚠️ ${errorMsg}`);
+      }
+    });
+  }
 
   deleteUser(): void {
     const userData = localStorage.getItem('user');

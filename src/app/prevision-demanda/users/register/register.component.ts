@@ -22,39 +22,37 @@ import { IValidEqualPassword } from '../user.model';
 import { UserService } from '../user.service';
 
 @Component({
-	selector: 'app-register', // Selector del componente
-	standalone: true, // Indicador de que el componente es independiente
-	imports: [NgIf, ReactiveFormsModule, HttpClientModule], // Importación de módulos necesarios
-	providers: [UserService], // Proveedor del servicio de usuario
-	templateUrl: './register.component.html', // Ruta de la plantilla HTML del componente
-	styleUrl: './register.component.scss', // Ruta del archivo de estilos del componente
+	selector: 'app-register',
+	standalone: true,
+	imports: [NgIf, ReactiveFormsModule, HttpClientModule],
+	providers: [UserService],
+	templateUrl: './register.component.html',
+	styleUrl: './register.component.scss',
 })
 export class RegisterComponent implements OnInit {
-	form?: FormGroup; // Formulario para el registro de usuario
-	lettersAndAccents?: string; // Expresión regular para letras y acentos
-	unaccentedLettersAndNumbers?: string; // Expresión regular para letras y números sin acentos
-	emailValid?: string; // Expresión regular para validar correo electrónico
-	selectedImage: string = "avatar1.png"; // Imagen seleccionada por defecto
+	form?: FormGroup;
+	lettersAndAccents?: string;
+	unaccentedLettersAndNumbers?: string;
+	emailValid?: string;
+	selectedImage: string = "avatar1.png";
 
-	userForm?: FormGroup; 
+	userForm?: FormGroup;
 
 	constructor(
-		protected router: Router, // Servicio de enrutamiento
-		protected userService: UserService, // Servicio de usuario
-		protected formBuilder: FormBuilder, // Constructor de formularios
+		protected router: Router,
+		protected userService: UserService,
+		protected formBuilder: FormBuilder,
 	) { }
 
 	ngOnInit() {
-		this.initForm(); // Inicializar el formulario al iniciar el componente
+		this.initForm();
 	}
 
-	// Método para inicializar el formulario de registro
 	initForm(): void {
-		// Definición de expresiones regulares
-		this.lettersAndAccents = `^([a-z A-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-z A-ZÀ-ÿ\u00f1\u00d1]*)*[a-z A-ZÀ-ÿ\u00f1\u00d1])+$`;
-		this.unaccentedLettersAndNumbers = '[A-Za-z0-9]+';
-		this.emailValid = `^[a-zA-Z0-9.!#$%++/=?^_{|}-~]+@[a-zA-Z0-9.-]+(?:\.[[a-zA-Z0-9]{2,4}$)`;
-		// Creación del formulario con controles y validaciones
+		this.lettersAndAccents = `^([a-z A-ZÀ-ÿ\u00f1\u00d1]+(\\s*[a-z A-ZÀ-ÿ\u00f1\u00d1]*)*[a-z A-ZÀ-ÿ\u00f1\u00d1])+$`;
+		this.unaccentedLettersAndNumbers = '^[A-Za-z0-9]+$';
+		this.emailValid = `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$`;
+
 		this.form = new FormGroup(
 			{
 				name: new FormControl('', Validators.compose([
@@ -73,42 +71,36 @@ export class RegisterComponent implements OnInit {
 					Validators.required,
 					Validators.minLength(6),
 					Validators.maxLength(30),
-					Validators.pattern(this.emailValid)]),
-					UserMailValidator.validUserMail(this.userService)
-				),
+					Validators.pattern(this.emailValid)
+				]), UserMailValidator.validUserMail(this.userService)),
 				password: new FormControl('', Validators.compose([
-					PasswordStrengthValidator.validPasswordStrength,
 					Validators.required,
 					Validators.minLength(8),
-					Validators.maxLength(20)
+					Validators.maxLength(20),
+					PasswordStrengthValidator.validPasswordStrength
 				])),
 				passwordConfirm: new FormControl('', Validators.compose([
-					PasswordStrengthValidator.validPasswordStrength,
 					Validators.required,
 					Validators.minLength(8),
-					Validators.maxLength(20)
+					Validators.maxLength(20),
+					PasswordStrengthValidator.validPasswordStrength
 				])),
-				acept1: new FormControl('', Validators.compose([
-					Validators.requiredTrue,
-				])),
-				acept2: new FormControl('', Validators.compose([
-					Validators.requiredTrue
-				]))
-			}, (formGroup: AbstractControl): IValidEqualPassword | null => {
+				acept1: new FormControl('', Validators.requiredTrue),
+				acept2: new FormControl('', Validators.requiredTrue)
+			},
+			(formGroup: AbstractControl): IValidEqualPassword | null => {
 				return EqualPasswordValidator.validEqualPassword(formGroup);
 			}
 		);
 	}
 
-	// Método para seleccionar una imagen de perfil
 	selectImage(event: any) {
 		const checkbox = event.target as HTMLInputElement;
 		if (checkbox.checked) {
 			this.selectedImage = checkbox.value;
-			// Desmarcar los demás checkboxes
 			const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-			checkboxes.forEach((cb: Element) => { // Cambiado el tipo a Element
-				const cbInput = cb as HTMLInputElement; // Convertir a HTMLInputElement
+			checkboxes.forEach((cb: Element) => {
+				const cbInput = cb as HTMLInputElement;
 				if (cbInput !== checkbox) {
 					cbInput.checked = false;
 				}
@@ -117,32 +109,72 @@ export class RegisterComponent implements OnInit {
 		}
 	}
 
-	// Método para guardar el nuevo usuario
+	// Validación manual extra por si el validador personalizado falla silenciosamente
+	isPasswordComplex(password: string): boolean {
+		const hasUpper = /[A-Z]/.test(password);
+		const hasLower = /[a-z]/.test(password);
+		const hasNumber = /[0-9]/.test(password);
+		const hasSymbol = /[^A-Za-z0-9]/.test(password);
+		return hasUpper && hasLower && hasNumber && hasSymbol;
+	}
+
 	save(): void {
-		if (this.form?.value) {
-			// Construir objeto de usuario
+		if (this.form?.pending) {
+			alert("⏳ Aún se están validando los campos. Espera un momento.");
+			return;
+		}
+
+		if (this.form?.valid) {
+			const password = this.form.value.password;
+
+			if (!this.isPasswordComplex(password)) {
+				alert("❌ La contraseña debe contener mayúsculas, minúsculas, números y símbolos.");
+				return;
+			}
+
 			const USER = {
 				name: this.form.value.name,
-				nickName: this.form.value.nickName,
-				role: "USER",
 				email: this.form.value.email,
-				password: this.form.value.password,
+				nick_name: this.form.value.nickName,
+				role: "user",
+				password: password,
 				image: this.selectedImage,
 			};
-			console.log(USER); // Mostrar usuario en consola
-			this.postRegister(USER); // Enviar solicitud de registro al servidor
+
+			console.log("✅ Registrando usuario:", USER);
+			this.postRegister(USER);
+		} else {
+			console.warn("❌ Formulario inválido:", this.form?.errors, this.form?.value);
+
+			// Ver qué campo está mal
+			Object.keys(this.form?.controls || {}).forEach(key => {
+				const control = this.form?.get(key);
+				console.log(`  ${key}:`, {
+					valid: control?.valid,
+					errors: control?.errors
+				});
+			});
+
+			alert("❌ El formulario contiene errores. Revisa los campos obligatorios.");
 		}
 	}
 
-	// Método para enviar la solicitud de registro al servidor
+
+
 	postRegister(user: any): void {
-		this.userForm = this.formBuilder.group(user)
-		console.log(this.userForm)
+		this.userForm = this.formBuilder.group(user);
 		this.userService.postRegister(this.userForm.value)
-			.subscribe((data: any): any => {
-				if (data) {
-					localStorage.setItem('user', JSON.stringify(data)); // Almacenar los datos del usuario en el almacenamiento local
-					this.router.navigate(['conversations']); // Redirigir al perfil del usuario
+			.subscribe({
+				next: (data: any) => {
+					if (data) {
+						localStorage.setItem('user', JSON.stringify(data));
+						alert("✅ Usuario creado con éxito. Ahora puedes iniciar sesión.");
+						this.router.navigate(['/login']);
+					}
+				},
+				error: (err) => {
+					console.error("❌ Error al registrar:", err);
+					alert("❌ Error al registrar usuario. Inténtalo de nuevo.");
 				}
 			});
 	}
