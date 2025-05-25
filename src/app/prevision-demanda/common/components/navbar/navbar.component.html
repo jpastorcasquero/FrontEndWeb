@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <strong>
+        JPC Informática
+      </strong>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 list-nav">
+        <li *ngIf="!is_user">
+          <a class='navbar-brand' [routerLink]="['/register']">Registro</a>
+        </li>
+        <li *ngIf="!is_user">
+          <a class='navbar-brand' [routerLink]="['/login']">Inicio Sesión</a>
+        </li>
+        <li *ngIf="is_user">
+          <a [routerLink]="['/connections']">Conexiones</a>
+        </li>
+
+        <li *ngIf="!is_user">
+          <a class='navbar-brand' [routerLink]="['/info']">Información</a>
+        </li>
+
+
+      </ul>
+    </div>
+    <div class="avatar-container" *ngIf="is_user">
+      <img [src]="avatarImageUser" alt="Avatar" (click)="toggleMenu()">
+      <div class="avatar-menu" *ngIf="showMenu">
+        <ul>
+          <li><a [routerLink]="['/profile']" (click)="closeMenu()">Modificar perfil</a></li>
+          <li><a [routerLink]="['/phone-user']" (click)="closeMenu()">Teléfono</a></li>
+          <li><a [routerLink]="['/addresses-user']" (click)="closeMenu()">Dirección</a></li>
+          <li><a [routerLink]="['/connections']" (click)="closeMenu()">Conexiones</a></li>
+          <li><a [routerLink]="['/get-classifier']" (click)="closeMenu()">Clasificador</a></li>
+          <li><a [routerLink]="['/get-prediction']" (click)="closeMenu()">Prediccion</a></li>
+          <li><a href="#" (click)="closeSesion(); closeMenu()">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

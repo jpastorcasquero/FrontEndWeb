@@ -1,0 +1,74 @@
+table,
+.end-table {
+  width: 100%;
+  background-color: #46e3db;
+}
+
+.custom-card {
+  margin-bottom: 20px;
+  margin-top: 20px; /* Añadir margen superior para separar la tabla del botón */
+}
+
+.custom-table {
+  border-radius: 10px;
+}
+
+.titulo {
+  font-weight: bold;
+}
+
+.fila-roja {
+  background-color: #7be9e2;
+}
+
+.fila-impares:nth-child(odd) {
+  background-color: #7be9e2;
+}
+
+.btn-ejecutar {
+  background-color: #46e3db;
+  color: #263238;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold; /* Texto en negrita */
+  margin-top: 20px; /* Añadir margen superior */
+  margin-right: 10px; /* Añadir margen derecho para separar los botones */
+}
+
+.btn-ejecutar:hover {
+  background-color: #0db3aa;
+}
+
+.btn-ejecutar:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.loading-container .mat-progress-bar {
+  background-color: #4caf50; /* Cambiar color de la barra de progreso a verde */
+}
+
+.error-message {
+  color: red;
+  margin-top: 20px;
+}
+
+.loading-error-message {
+  color: orange;
+  margin-top: 20px;
+}
+
+/* Estilo para la columna Predicción */
+.mat-column-Count_Predict {
+  font-weight: bold;
+}

@@ -1,0 +1,16 @@
+<body>
+	<app-navbar></app-navbar>
+	<div *ngIf="main" class="row">
+		<div class="col container-logo">
+			<img src="../../assets/img/Logo.png" alt="">
+		</div>
+		<div class="col container-texto">
+			<p>Previsión de la demanada de alquier de bicicletas</p>
+		</div>
+	</div>
+	<div class="container">
+		<router-outlet></router-outlet>
+	</div>
+
+	<app-footer></app-footer>
+</body>

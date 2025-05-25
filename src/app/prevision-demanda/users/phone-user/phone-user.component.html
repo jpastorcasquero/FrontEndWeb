@@ -1,0 +1,92 @@
+<ng-container *ngIf="form">
+	<div class="container mt-5">
+		<div class="row justify-content-md-center">
+			<form [formGroup]="form" (ngSubmit)="savePhone()" novalidate autocomplete="off" class="col-4">
+				<h3>Sus teléfonos</h3>
+
+				<!-- Campo para el primer prefijo telefónico -->
+				<div class="mt-2">
+					<label for="countryCode">Prefijo telefónico:</label>
+					<select class="form-control" id="countryCode" name="countryCode" formControlName="countryCode">
+						<option value="+34">España (+34)</option>
+						<option value="+1">Estados Unidos (+1)</option>
+						<option value="+44">Reino Unido (+44)</option>
+						<option value="+49">Alemania (+49)</option>
+						<option value="+33">Francia (+33)</option>
+						<option value="+39">Italia (+39)</option>
+						<option value="+86">China (+86)</option>
+						<option value="+81">Japón (+81)</option>
+						<option value="+7">Rusia (+7)</option>
+						<option value="+91">India (+91)</option>
+						<option value="+52">México (+52)</option>
+						<option value="+55">Brasil (+55)</option>
+						<option value="+61">Australia (+61)</option>
+						<option value="+64">Nueva Zelanda (+64)</option>
+						<option value="+971">Emiratos Árabes Unidos (+971)</option>
+						<option value="+966">Arabia Saudita (+966)</option>
+						<option value="+20">Egipto (+20)</option>
+						<option value="+27">Sudáfrica (+27)</option>
+						<option value="+82">Corea del Sur (+82)</option>
+						<option value="+852">Hong Kong (+852)</option>
+						<option value="+65">Singapur (+65)</option>
+					</select>
+				</div>
+
+				<!-- Campo para el primer número de teléfono -->
+				<div class="mt-2">
+					<label for="phoneNumber">Número de teléfono:</label>
+					<input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" name="phoneNumber"
+						placeholder="Introduce tu número de teléfono" required>
+				</div>
+
+				<!-- Campo para el segundo prefijo telefónico -->
+				<div class="mt-2">
+					<label for="countryCode2">Prefijo telefónico 2:</label>
+					<select class="form-control" id="countryCode2" name="countryCode2" formControlName="countryCode2">
+						<option value="+34">España (+34)</option>
+						<option value="+1">Estados Unidos (+1)</option>
+						<option value="+44">Reino Unido (+44)</option>
+						<option value="+49">Alemania (+49)</option>
+						<option value="+33">Francia (+33)</option>
+						<option value="+39">Italia (+39)</option>
+						<option value="+86">China (+86)</option>
+						<option value="+81">Japón (+81)</option>
+						<option value="+7">Rusia (+7)</option>
+						<option value="+91">India (+91)</option>
+						<option value="+52">México (+52)</option>
+						<option value="+55">Brasil (+55)</option>
+						<option value="+61">Australia (+61)</option>
+						<option value="+64">Nueva Zelanda (+64)</option>
+						<option value="+971">Emiratos Árabes Unidos (+971)</option>
+						<option value="+966">Arabia Saudita (+966)</option>
+						<option value="+20">Egipto (+20)</option>
+						<option value="+27">Sudáfrica (+27)</option>
+						<option value="+82">Corea del Sur (+82)</option>
+						<option value="+852">Hong Kong (+852)</option>
+						<option value="+65">Singapur (+65)</option>
+					</select>
+				</div>
+
+				<!-- Campo para el segundo número de teléfono -->
+				<div class="mt-2">
+					<label for="phoneNumber2">Número de teléfono 2:</label>
+					<input type="text" class="form-control" id="phoneNumber2" formControlName="phoneNumber2"
+						name="phoneNumber2" placeholder="Introduce tu número de teléfono">
+				</div>
+
+				<!-- Botón para borrar el primer teléfono -->
+				<button type="button" (click)="deletePhoneButton()" class="btn btn-danger mt-3">Borrar primer
+					teléfono</button>
+
+				<!-- Botón para borrar el segundo teléfono -->
+				<button type="button" (click)="deletePhone2Button()" class="btn btn-danger mt-3">Borrar segundo
+					teléfono</button>
+
+				<!-- Botón para guardar los teléfonos -->
+				<div class="col-5">
+					<button type="submit" class="btn boton-generico">Guardar Teléfono</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</ng-container>

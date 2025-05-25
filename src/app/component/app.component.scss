@@ -1,0 +1,71 @@
+.container {
+    flex: 1; /* Hace que el contenido principal ocupe el espacio restante */
+    margin-bottom: 20px;
+    color: whitesmoke;
+}
+
+.button {
+    background: linear-gradient(#5c6bc0, #2a9d8f); /* Gradiente de fondo */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px 10px; /* Relleno */
+    color: white; /* Color del texto */
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #344955;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    background-color: #263238;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Estilos de prueba para verificar el fondo */
+.test-box {
+    height: 50px; /* Altura mínima de un elemento para pruebas */
+    background-color: #5c6bc0; /* Color de prueba */
+    margin: 10px;
+}
+
+
+.container-logo img {
+    width: 70%; /* La imagen ocupará el 50% del ancho de su contenedor */
+    height: auto; /* La altura se ajustará automáticamente para mantener la proporción */
+    max-height: 100vh; /* Limita la altura de la imagen al 100% de la altura de la ventana */
+    object-fit: cover;
+    margin-left: 150px;
+}
+
+.container-texto p {
+    color: whitesmoke;
+    width: 50%; /* El texto ocupará el 50% del ancho de su contenedor */
+    height: auto; /* La altura se ajustará automáticamente para mantener la proporción */
+    max-height: 100vh; /* Limita la altura del texto al 100% de la altura de la ventana */
+    object-fit: cover;
+    font-size: 3vw;
+    font-family: 'Arial', sans-serif; /* Fuente del texto */
+    text-align: center; /* Alineación del texto */
+    line-height: 1.5; /* Altura de línea para un mejor espaciado */
+    padding: 20px; /* Relleno alrededor del texto */
+    font-family: 'Bradley Hand', cursive, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-right: 150px;
+}
+
+.row {
+    display: flex; /* Usa flexbox para los elementos hijos */
+    margin: 0;
+    padding: 0;
+}
+
+.col {
+    display: flex; /* Usa flexbox para los elementos hijos */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+}

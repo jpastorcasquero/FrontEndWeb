@@ -1,0 +1,59 @@
+.navbar{
+  //background-color: #61f0ef;
+  background-color: #06e0d7;
+}
+a {
+  text-decoration: none;
+  color: #263238;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.list-nav{
+  font-size: 20px;
+}
+
+
+.avatar-container {
+  position: relative;
+  cursor: pointer;
+  margin-left: auto; /* Coloca el avatar en la esquina derecha */
+}
+
+.avatar-container img {
+  width: 40px; /* Tamaño del avatar */
+  height: 40px;
+  border-radius: 50%; /* Para hacer la imagen redonda */
+  margin-left: auto;
+}
+
+.avatar-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff; /* Fondo blanco para el menú */
+  border: 1px solid #ccc; /* Borde gris */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+  z-index: 1;
+  display: flex; /* Usamos flexbox para ajustar el tamaño */
+  flex-direction: column; /* Los elementos del menú se colocan en columna */
+  padding: 10px; /* Añadimos espacio interno al menú */
+  font-size: 16px; /* Tamaño de la fuente */
+  width: 200px; /* Ancho del menú */
+}
+
+
+.avatar-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.avatar-menu li {
+  padding: 10px 0; /* Espacio interno para los elementos del menú */
+}
+
+.avatar-menu li:hover {
+  background-color: #f8f9fa; /* Color de fondo al pasar el ratón */
+}

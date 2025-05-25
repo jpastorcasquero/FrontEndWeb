@@ -1,0 +1,24 @@
+.boton-generico {
+  background-color: #06e0d7;
+}
+
+input[type="checkbox"] {
+  /* Estilos para el checkbox */
+  margin-right: 5px; /* Margen a la derecha del checkbox */
+}
+
+label {
+  /* Estilos para el texto asociado al checkbox */
+  font-weight: bold; /* Texto en negrita */
+}
+.avatars-container {
+  border: 2px solid #06e0d7; /* Borde fino de color gris */
+  padding: 10px; /* Espacio interno para separar el borde de las imágenes */
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.avatar-bajo{
+  margin-top: 10px;
+}

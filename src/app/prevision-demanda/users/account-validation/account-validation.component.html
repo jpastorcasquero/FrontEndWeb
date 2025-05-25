@@ -1,0 +1,81 @@
+<ng-container *ngIf="form">
+	<div class="container mt-5">
+		<div class="row justify-content-md-center">
+			<form
+				[formGroup]="form"
+				(ngSubmit)="save()"
+				novalidate
+				autocomplete="off"
+				class="col-4">
+				<h3>Codigo de validacion</h3>
+
+				<!-- Input de Email -->
+				<div class="mt-2">
+					<div *ngIf="emailValid">
+						<label for="email" class="form-label">Correo:</label>
+						<input
+							formControlName="email"
+							name="email"
+							id="email"
+							type="email"
+							placeholder="email"
+							[pattern]="emailValid"
+							required
+							minlength="6"
+							maxlength="30"
+							class="form-control" />
+					</div>
+					<div
+						*ngIf="
+							form.get('email')?.errors &&
+							(form.get('email')?.dirty ||
+								form.get('email')?.touched)
+						"
+						class="mt-2 text-danger">
+						<p *ngIf="form.get('email')?.hasError('required')">
+							Field is required
+						</p>
+						<p *ngIf="form.get('email')?.hasError('pattern')">
+							Wrong email format
+						</p>
+						<p *ngIf="form.get('email')?.hasError('minlength')">
+							Min of 6 characters
+						</p>
+						<p *ngIf="form.get('email')?.hasError('maxlength')">
+							Max of 30 characters
+						</p>
+					</div>
+				</div>
+
+				<!-- Inputs Numéricos para el código de validación -->
+				<div class="mt-3">
+					<label for="numberInput1" class="form-label">Código de validación:</label>
+					<div class="input-group">
+						<input *ngFor="let n of [1, 2, 3, 4, 5, 6]; let i = index"
+							[formControlName]="'numberInput' + n"
+							id="'numberInput' + n"
+							type="text"
+							maxlength="1"
+							pattern="[0-9]"
+							class="form-control text-center"
+							[ngClass]="{'input-margin': i < 5, 'input-last': i === 5}"
+							[tabindex]="i + 1"
+							placeholder="_" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-9"></div>
+					<div class="col-3">
+						<button
+							type="submit"
+							[disabled]="form.invalid"
+							class="btn mt-3 boton-generico">
+							Validar
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<ng-container>

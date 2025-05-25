@@ -1,0 +1,19 @@
+ .containerInfo{
+    background-color: rgb(238, 238, 234);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Agrega un borde suave */
+    color: black;
+    margin-top: 10px;
+}
+.containerInfo h5, p{
+    text-align: left;
+}
+
+.containerEmpresas{
+    text-align: center; /* Alinea las imágenes horizontalmente */
+}
+.containerEmpresas .img-container img {
+    margin: 0 50px; /* Añade espacio entre las imágenes */
+}

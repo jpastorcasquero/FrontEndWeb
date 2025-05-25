@@ -1,0 +1,70 @@
+<ng-container *ngIf="form">
+  <div class="container mt-5">
+    <div class="row justify-content-md-center">
+      <form
+        [formGroup]="form"
+        (ngSubmit)="saveAddresses()"
+        autocomplete="off"
+        novalidate
+        class="col-6">
+
+        <h3 class="mb-4 text-center">Gestión de Dirección</h3>
+
+        <!-- Dirección -->
+        <div class="mb-3">
+          <label for="address" class="form-label">Dirección:</label>
+          <input type="text" id="address" class="form-control"
+                 formControlName="address" placeholder="Calle, número..." required>
+          <div class="text-danger" *ngIf="form.get('address')?.touched && form.get('address')?.invalid">
+            <span *ngIf="form.get('address')?.errors?.['required']">La dirección es obligatoria.</span>
+            <span *ngIf="form.get('address')?.errors?.['pattern']">Formato inválido (usa letras, números, signos comunes...)</span>
+          </div>
+        </div>
+
+        <!-- Ciudad -->
+        <div class="mb-3">
+          <label for="city" class="form-label">Ciudad:</label>
+          <input type="text" id="city" class="form-control"
+                 formControlName="city" placeholder="Introduce tu ciudad" required>
+          <div class="text-danger" *ngIf="form.get('city')?.touched && form.get('city')?.invalid">
+            <span *ngIf="form.get('city')?.errors?.['required']">La ciudad es obligatoria.</span>
+            <span *ngIf="form.get('city')?.errors?.['pattern']">Solo letras y espacios.</span>
+          </div>
+        </div>
+
+        <!-- País -->
+        <div class="mb-3">
+          <label for="country" class="form-label">País:</label>
+          <input type="text" id="country" class="form-control"
+                 formControlName="country" placeholder="Introduce tu país" required>
+          <div class="text-danger" *ngIf="form.get('country')?.touched && form.get('country')?.invalid">
+            <span *ngIf="form.get('country')?.errors?.['required']">El país es obligatorio.</span>
+            <span *ngIf="form.get('country')?.errors?.['pattern']">Solo letras y espacios.</span>
+          </div>
+        </div>
+
+        <!-- Código Postal -->
+        <div class="mb-3">
+          <label for="postalNumber" class="form-label">Código Postal:</label>
+          <input type="text" id="postalNumber" class="form-control"
+                 formControlName="postalNumber" placeholder="Ej: 47001" required>
+          <div class="text-danger" *ngIf="form.get('postalNumber')?.touched && form.get('postalNumber')?.invalid">
+            <span *ngIf="form.get('postalNumber')?.errors?.['required']">El código postal es obligatorio.</span>
+            <span *ngIf="form.get('postalNumber')?.errors?.['pattern']">Debe contener exactamente 5 dígitos.</span>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex justify-content-between mt-4">
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+            Guardar Dirección
+          </button>
+          <button type="button" class="btn btn-danger" (click)="deleteAddressButton()">
+            Borrar Dirección
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</ng-container>

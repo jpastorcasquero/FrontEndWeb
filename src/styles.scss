@@ -1,0 +1,59 @@
+// Tematización personalizada para Angular Material
+// + información: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Además, se importan otros componentes en tu aplicación.
+
+// Incluimos los estilos comunes para Angular Material. 
+@include mat.core();
+
+// Definimos las paletas de colores del tema usando las paletas de Material Design 
+// disponibles en palette.scss(importadas arriba). 
+// Paletas de colores disponibles: https://material.io/design/color/
+$prevision-demanda-front-primary: mat.define-palette(mat.$indigo-palette);
+$prevision-demanda-front-accent: mat.define-palette(mat.$pink-palette,
+    A200,
+    A100,
+    A400);
+
+// Paleta de advertencia (por defecto es rojo).
+$prevision-demanda-front-warn: mat.define-palette(mat.$red-palette);
+
+// Crea el objeto de tema, que nos marca las configuraciones de tematización
+// individuales como "color" o "tipografía".
+$prevision-demanda-front-theme: mat.define-light-theme((color: (primary: $prevision-demanda-front-primary,
+        accent: $prevision-demanda-front-accent,
+        warn: $prevision-demanda-front-warn,
+      ),
+      typography: mat.define-typography-config(),
+      density: 0,
+    ));
+
+// Incluimos los estilos de tema para el núcleo y cada componente usado en tu aplicación.
+@include mat.all-component-themes($prevision-demanda-front-theme);
+
+// Estilos globales
+.genericStyleColor {
+  background-color: #5eecbd;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+  min-height: 100%;
+  height: auto;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #dff0d8; // Fondo verde claro
+}
+
+app-root {
+  display: block;
+  min-height: 100%;
+  background-color: inherit; // Hereda el fondo del body
+}

@@ -1,0 +1,37 @@
+//@import '../../../../../styles.scss';
+
+.footer {
+  margin-top: auto; /* Hace que el footer se pegue al fondo de la página */
+  width: 100%;
+  bottom: 0; /* Fijar el footer al fondo de la ventana del navegador */
+  //background-color: #529780;
+  //background-color: #05a9b6;
+  background-color: #099d99;
+  padding: 10px 0; /* Añadir relleno superior e inferior de 10px */
+}
+
+
+.footer a{
+  color:black;
+  //text-decoration: none; /*esto es para quitar lo subrayado*/
+}
+
+.redes-sociales i{
+  margin-right: 3px;
+}
+
+.footer li {
+  list-style-type: none; /* Elimina los puntos de la lista */
+  padding: 0; /* Elimina el relleno */
+  margin-bottom: 5px; /* Espacio entre elementos de la lista */
+  margin-right: 10px; /* Espacio entre los elementos */
+  display: block;
+  text-align: left; /* Alinea los enlaces a la izquierda */
+}
+
+.footer hr{
+  border-top: 3px solid black; /* Establece el color de la línea */
+  margin: 10px 0; /* Agrega espacio arriba y abajo de la línea */
+  width: 15%; /* Ancho de la línea separadora */
+  margin-right: auto; /* Mueve la línea hacia la izquierda */
+}

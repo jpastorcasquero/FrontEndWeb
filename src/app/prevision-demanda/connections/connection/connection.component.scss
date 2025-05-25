@@ -1,0 +1,26 @@
+table,
+.end-table {
+  width: 100%;
+  background-color: #46e3db;
+  //#7be9e2; 
+}
+
+.custom-card {
+  margin-bottom: 20px;
+}
+
+.custom-table {
+  border-radius: 10px;
+}
+
+.titulo {
+  font-weight: bold;
+}
+
+.fila-roja {
+  background-color: #7be9e2;
+}
+
+.fila-impares:nth-child(odd) {
+  background-color: #7be9e2;
+}
