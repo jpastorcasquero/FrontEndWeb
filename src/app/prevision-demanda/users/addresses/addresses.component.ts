@@ -33,7 +33,8 @@ export class AddressesComponent implements OnInit {
     this.form = this.formBuilder.group({
       address: ['', [
         Validators.required,
-        Validators.pattern(/^[\w\s\.,\-ºª]{5,100}$/)
+        Validators.pattern(/^[a-zA-ZÀ-ÿ0-9\s.,ºª()\-#\/]{5,100}$/)
+
       ]],
       city: ['', [
         Validators.required,
