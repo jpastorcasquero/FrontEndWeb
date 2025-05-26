@@ -1,6 +1,6 @@
 [build]
   command = "npm install --legacy-peer-deps && ng build --configuration=production"
-  publish = "dist/prevision-demanda-front"
+  publish = "dist/prevision-demanda-front/browser"
 
 [functions]
   node_bundler = "esbuild"
