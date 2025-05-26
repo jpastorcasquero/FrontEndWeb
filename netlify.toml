@@ -2,8 +2,5 @@
   command = "npm install --legacy-peer-deps && ng build --configuration=production"
   publish = "dist/prevision-demanda-front"
 
-[[plugins]]
-  package = "@netlify/angular-runtime"
-  # ⛔️ Desactivamos el plugin para evitar que interfiera
-  [plugins.inputs]
-  skip = true
+[functions]
+  node_bundler = "esbuild"
