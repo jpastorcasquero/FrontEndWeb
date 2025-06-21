@@ -35,6 +35,7 @@ table,
   font-size: 16px;
   font-weight: bold; /* Texto en negrita */
   margin-top: 20px; /* Añadir margen superior */
+  margin-right: 10px; /* Añadir margen derecho para separar los botones */
 }
 
 .btn-ejecutar:hover {
@@ -65,4 +66,9 @@ table,
 .loading-error-message {
   color: orange;
   margin-top: 20px;
+}
+
+/* Estilo para la columna de Precisión (opcional, similar a Count_Predict en predicción) */
+.mat-column-Precision {
+  font-weight: bold;
 }

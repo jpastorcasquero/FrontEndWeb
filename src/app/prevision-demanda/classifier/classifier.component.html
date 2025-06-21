@@ -1,3 +1,5 @@
+<h2 style="margin-bottom: 16px;">Obtención del clasificador</h2>
+
 <!-- Botones de acción alineados y separados -->
 <div style="display: flex; gap: 16px; margin-bottom: 16px;">
   <button (click)="ejecutarProceso()" class="btn-ejecutar" [disabled]="loading">
@@ -32,7 +34,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns" class="fila-impares"></tr>
   </table>
 </mat-card>
 
