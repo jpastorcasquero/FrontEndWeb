@@ -133,10 +133,12 @@ export class PredictionComponent implements OnInit, AfterViewInit {
   }
 
   getDayOfWeek(dateString: string): string {
-    const date = new Date(dateString);
+    const [day, month, year] = dateString.split(' - ')[0].split('/');
+    const date = new Date(Number(year), Number(month) - 1, Number(day)); // cuidado con mes - 1
     const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
     return days[date.getDay()];
   }
+
 
   exportToExcel() {
     const dataToExport = this.dataSource.data.map(element => ({
